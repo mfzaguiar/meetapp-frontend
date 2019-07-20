@@ -13,7 +13,7 @@ export default function Header() {
       <Content>
         <nav>
           <Link to="/dashboard">
-            <img src={logo} alt="Meetup" />
+            <img src={logo} alt="Meetapp" />
             <span>Meetapp</span>
           </Link>
         </nav>
