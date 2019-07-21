@@ -29,14 +29,17 @@ export const Content = styled.div`
 
   div {
     display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
+
+    > span {
+      color: #fff;
+    }
+
     strong {
+      display: block;
       color: #fff;
       font-size: 15px;
       align-content: flex-end;
       margin-right: 10px;
-      font-weight: normal;
     }
 
     button {
@@ -51,5 +54,18 @@ export const Content = styled.div`
         background: ${lighten(0.05, '#d44059')};
       }
     }
+  }
+`;
+
+export const WrapperProfile = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-around;
+
+  span {
+    margin-right: 10px;
+    font-size: 12px;
+    color: #ccc;
   }
 `;
