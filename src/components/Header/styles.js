@@ -4,6 +4,25 @@ import { lighten } from 'polished';
 export const Container = styled.div`
   background: ${lighten(0.1, '#000')};
   padding: 0 30px;
+
+  button {
+    display: flex;
+    align-items: center;
+    border: none;
+    background: transparent;
+    color: #d44059;
+    font-weight: bold;
+    font-size: 15px;
+
+    svg {
+      margin-right: 2px;
+      transition: transform 0.2s;
+    }
+
+    &:hover svg {
+      transform: translateX(-2px);
+    }
+  }
 `;
 export const Content = styled.div`
   height: 64px;

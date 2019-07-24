@@ -41,17 +41,63 @@ export const Header = styled.div`
 `;
 
 export const ItemMeetup = styled.li`
-  align-items: center;
-  justify-content: center;
+  display: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
   padding: 20px;
   border-radius: 4px;
   background: ${darken(0.05, '#36253D')};
   margin-top: 10px;
 
+  span {
+    font-size: 15px;
+    font-weight: bold;
+    color: #eeee;
+  }
+
+  div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    & + div {
+      padding-top: 5px;
+      margin-top: 5px;
+      border-top: 1px solid #eeee;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+
+      a {
+        color: #7159c1;
+        text-decoration: none;
+        padding-left: 10px;
+      }
+    }
+  }
+`;
+
+export const Loading = styled.strong`
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  font-size: 25px;
+  color: #fff;
+  margin-top: 30px;
+`;
+
+export const Wrapper = styled.div`
   button {
     border: none;
     background: transparent;
-    color: #fff;
+    color: #eee;
     font-size: 16px;
+  }
+
+  strong {
+    font-size: 15px;
+    color: #fff;
   }
 `;

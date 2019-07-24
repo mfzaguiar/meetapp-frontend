@@ -1,6 +1,15 @@
 import styled from 'styled-components';
-import { lighten } from 'polished';
+import { lighten, darken } from 'polished';
 import { Input } from '@rocketseat/unform';
+
+export const Loading = styled.strong`
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  font-size: 25px;
+  color: #fff;
+  margin-top: 30px;
+`;
 
 export const Inputml = styled(Input)`
   background: rgba(0, 0, 0, 0.1);
@@ -33,7 +42,7 @@ export const Container = styled.div`
       height: 44px;
       padding: 0 15px;
       color: #fff;
-      margin: 0 0 10px;
+      margin: 0 0 15px;
       &::placeholder {
         color: rgba(255, 255, 255, 0.7);
       }
@@ -55,6 +64,11 @@ export const Container = styled.div`
       &:disabled {
         opacity: 0.7;
         cursor: wait;
+      }
+      & + button {
+        &:hover {
+          background: ${darken(0.1, '#d44059')};
+        }
       }
     }
 

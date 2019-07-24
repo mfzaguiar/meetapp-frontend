@@ -1,8 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Header, ItemMeetup } from './styles';
+import { MdLocationOn } from 'react-icons/md';
+
+import api from '~/services/api';
+import { Container, Header, ItemMeetup, Wrapper, Loading } from './styles';
 
 export default function Dashboard() {
+  const [meetups, setMeetups] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadMeetups() {
+      const response = await api.get('organizing');
+      setMeetups(response.data);
+      setLoading(false);
+    }
+
+    loadMeetups();
+  }, []);
+
   return (
     <Container>
       <Header>
@@ -12,14 +28,25 @@ export default function Dashboard() {
         </Link>
       </Header>
 
-      <ul>
-        <ItemMeetup>
-          <button type="button"> Meetup React Native</button>
-        </ItemMeetup>
-        <ItemMeetup>
-          <button type="button"> ReactJS Meetup</button>
-        </ItemMeetup>
-      </ul>
+      {loading ? (
+        <Loading>CARREGANDO...</Loading>
+      ) : (
+        <ul>
+          {meetups.map(meetup => (
+            <ItemMeetup key={meetup.id}>
+              <Wrapper>
+                <strong> {meetup.title}</strong>
+                <strong>{new Date(meetup.date).toLocaleString()}</strong>
+              </Wrapper>
+              <div>
+                <MdLocationOn size={20} color="#eee" />
+                <span>{meetup.location}</span>
+                <Link to={`/meetupdetails/${meetup.id}`}>Detalhes</Link>
+              </div>
+            </ItemMeetup>
+          ))}
+        </ul>
+      )}
     </Container>
   );
 }
