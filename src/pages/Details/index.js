@@ -20,13 +20,9 @@ export default function DetailsMeetup({ match }) {
         setMeetup({ ...response.data, ...data });
         setLoading(false);
       } catch (err) {
-        const errData = err.response.data;
-        toast.error(
-          errData && errData.error
-            ? `Error editing meetup: ${errData.error}`
-            : 'Error editing meetup, try again'
-        );
+        toast.error('Error acess meetup details, please try again');
         setLoading(false);
+        history.push('/dashboard');
       }
     }
 

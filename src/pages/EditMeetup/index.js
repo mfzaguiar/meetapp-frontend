@@ -12,9 +12,7 @@ import BannerInput from '~/components/BannerInput';
 import DatePicker from '~/components/DatePickerInput';
 
 const schema = Yup.object().shape({
-  file_id: Yup.number()
-    .transform(value => (!value ? undefined : value))
-    .required('Selecione um banner'),
+  file_id: Yup.number().transform(value => (!value ? undefined : value)),
   title: Yup.string().required('Digite o título do meetup'),
   date: Yup.date().required('Selecione uma data'),
   description: Yup.string().required('Digite a descrição'),
@@ -28,17 +26,25 @@ export default function EditMeetup({ match }) {
 
   useEffect(() => {
     async function loadMeetup() {
-      const response = await api.get(`organizing/${id}`);
-      const data = {
-        title: response.data.title,
-        file_id: response.data.file_id,
-        description: response.data.description,
-        date: parseISO(response.data.date),
-        location: response.data.location,
-        banner: { file_id: response.data.file_id, url: response.data.File.url },
-      };
-      setMeetup(data);
-      setLoading(false);
+      try {
+        const response = await api.get(`organizing/${id}`);
+        const data = {
+          title: response.data.title,
+          description: response.data.description,
+          date: parseISO(response.data.date),
+          location: response.data.location,
+          banner: {
+            file_id: response.data.file_id,
+            url: response.data.File.url,
+          },
+        };
+        setMeetup(data);
+        setLoading(false);
+      } catch (err) {
+        toast.error('Error editing meetup, please try again');
+        setLoading(false);
+        history.push('/dashboard');
+      }
     }
     loadMeetup();
   }, [id]);
@@ -49,12 +55,9 @@ export default function EditMeetup({ match }) {
       toast.success('Meetup alterado com sucesso');
       history.push(`/dashboard`);
     } catch (err) {
-      const errData = err.response.data;
-      toast.error(
-        errData && errData.error
-          ? `Error editing meetup: ${errData.error}`
-          : 'Error editing meetup, try again'
-      );
+      toast.error('Error editing meetup, please try again');
+      setLoading(false);
+      history.push('/dashboard');
       setLoading(false);
     }
   }
