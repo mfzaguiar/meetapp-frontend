@@ -23,9 +23,8 @@ export const Container = styled.div`
 
   img {
     border-radius: 4px;
-    background-size: cover;
     height: 200px;
-    object-fit: cover;
+    object-fit: fill;
   }
 
   p {

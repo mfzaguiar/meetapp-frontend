@@ -26,7 +26,7 @@ export const Container = styled.div`
       height: 200px;
       border-radius: 4px;
       border: none;
-      object-fit: cover;
+      object-fit: fill;
     }
     input {
       display: none;
